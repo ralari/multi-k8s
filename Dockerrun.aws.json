@@ -1,0 +1,37 @@
+ {
+     "AWSEBDockerrunVersion": 2,
+     "containerDefinitions": [
+         {
+             "name": "client",
+             "image": "ntwdock/multi-client",
+             "hostname": "client",
+             "essential": false
+         },
+         {
+            "name": "server",
+            "image": "ntwdock/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "ntwdock/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "ntwdock/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+
+     ]
+ }
